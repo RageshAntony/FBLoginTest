@@ -136,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
 
                 //Now graph Query to read timeline posts
                 Bundle params = new Bundle();
-               params.putString("fields", "message,created_time,id,full_picture,status_type,source,comments.summary(true),likes.summary(true),attachments,comments");
+            //   params.putString("fields", "message,created_time,id,full_picture,status_type,source,comments.summary(true),likes.summary(true),attachments,comments");
+                params.putString("fields", "message,created_time,id,full_picture,status_type,source,likes.summary(true),attachments,comments");
                  // params.putString("fields", "message,comments");
 
                 params.putString("limit", "1000");

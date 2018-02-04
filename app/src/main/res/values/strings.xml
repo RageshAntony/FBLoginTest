@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FBLoginTest</string>
+    <string name = "facebook_app_id">1374350212664514</string>
+</resources>
