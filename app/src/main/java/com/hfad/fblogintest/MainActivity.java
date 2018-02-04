@@ -136,12 +136,11 @@ public class MainActivity extends AppCompatActivity {
 
                 //Now graph Query to read timeline posts
                 Bundle params = new Bundle();
-            //   params.putString("fields", "message,created_time,id,full_picture,status_type,source,comments.summary(true),likes.summary(true),attachments,comments");
-                params.putString("fields", "message,created_time,id,full_picture,status_type,source,likes.summary(true),attachments,comments");
-                //testing
+               params.putString("fields", "comments{attachment,comment_count,from,created_time,like_count,message,message_tags,parent,permalink_url,object,reactions{id,link,name,pic,profile_type,type,username,picture{url}},id,comments{attachment,comment_count,from,created_time,id,likes{id,pic,username,picture,name},like_count,message,message_tags,parent,permalink_url,reactions{id,link,name,pic,type,username,picture{url}}}},message,created_time,attachments{description,description_tags,media,target,title,type,url,subattachments},id,full_picture,status_type,likes{id,link,name,pic,pic_large,pic_small,pic_square,profile_type,username,picture{cache_key,height,url,width,is_silhouette}},reactions{id,link,name,pic,type,username,picture{url}},caption,from,icon,link,name,object_id,permalink_url,story,story_tags,timeline_visibility");
+             //   parameters.putString("fields", "comments{attachment,comment_count,from,created_time,like_count,message,message_tags,parent,permalink_url,object,reactions{id,link,name,pic,profile_type,type,username,picture{url}},id,comments{attachment,comment_count,from,created_time,id,likes{id,pic,username,picture,name},like_count,message,message_tags,parent,permalink_url,reactions{id,link,name,pic,type,username,picture{url}}}},message,created_time,attachments{description,description_tags,media,target,title,type,url,subattachments},id,full_picture,status_type,source,likes{id,link,name,pic,pic_large,pic_small,pic_square,profile_type,username,picture{cache_key,height,url,width,is_silhouette}},application,admin_creator,message_tags,reactions{id,link,name,pic,type,username,picture{url}}");                //testing
                  // params.putString("fields", "message,comments");
 
-                params.putString("limit", "1000");
+             //   params.putString("limit", "1000");
 
     /* make the API call */
                 //Method - 1
@@ -176,11 +175,12 @@ public class MainActivity extends AppCompatActivity {
                             /* handle the result */
                             try {
                                 EditText postsText = (EditText) findViewById(R.id.postText);
-                                String res = response.toString();
-                                res = res.replaceAll("\\{Response:\\s*\\w*\\W*\\s*[0-9]*\\W*\\w*:", "");
-                                res = res.replaceAll("\\,\\s*error:\\s*null\\W*\\s*","");
-                                postsText.setText(res);
-                                writeToFile(res,"response");
+                                JSONObject res = response.getJSONObject();
+                              //  res = res.replaceAll("\\{Response:\\s*\\w*\\W*\\s*[0-9]*\\W*\\w*:", "");
+                               // res = res.replaceAll("\\,\\s*error:\\s*null\\W*\\s*","");
+                                String posts = res.toString(2);
+                                postsText.setText(posts);
+                                writeToFile(posts,"FB_POST_");
                             }
                             catch (Exception e) {
                                     e.printStackTrace();
@@ -256,6 +256,8 @@ public class MainActivity extends AppCompatActivity {
 
         final File file = new File(path,filename+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())+".txt");
             Log.e("file Path",file.getAbsolutePath());
+
+            Toast.makeText(getApplicationContext(),"file Path :: "+file.getAbsolutePath(),Toast.LENGTH_LONG).show();
 
         // Save your stream, don't forget to flush() it before closing it.
 
