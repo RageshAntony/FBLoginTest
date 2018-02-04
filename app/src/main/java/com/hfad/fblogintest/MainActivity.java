@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 Bundle params = new Bundle();
             //   params.putString("fields", "message,created_time,id,full_picture,status_type,source,comments.summary(true),likes.summary(true),attachments,comments");
                 params.putString("fields", "message,created_time,id,full_picture,status_type,source,likes.summary(true),attachments,comments");
+                //testing
                  // params.putString("fields", "message,comments");
 
                 params.putString("limit", "1000");
